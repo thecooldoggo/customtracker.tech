@@ -4,22 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A tracker that counts how many times the word 'customs' has been mentioned in NickEh30's Twitch chat.">
-    <link rel="shortcut icon" href="images/favicon.webp" type="image/png">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
     <meta name="author" content="TheCoolDoggo">
-    <title>Custom Tracker - TheCoolDoggo</title>
-        <!-- Open Graph Meta Tags -->
-        <meta property="og:title" content="Custom Tracker - TheCoolDoggo">
-        <meta property="og:description" content="A tracker that counts how many times the word 'customs' has been mentioned in NickEh30's Twitch chat.">
-        <meta property="og:url" content="https://customtracker.tech/">
-        <meta property="og:image" content="https://customtracker.tech/images/preview.png">
-        <meta property="og:type" content="website">
-    
+    <title>NickEh30 Custom Tracker - TheCoolDoggo</title>
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Custom Tracker - TheCoolDoggo">
+    <meta property="og:description" content="A tracker that counts how many times the word 'customs' has been mentioned in NickEh30's Twitch chat.">
+    <meta property="og:url" content="https://customtracker.tech/">
+    <meta property="og:image" content="https://customtracker.tech/images/preview.png">
+    <meta property="og:type" content="website">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
     <style>
         html {
             scroll-behavior: smooth;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Ubuntu', sans-serif;
             margin: 0;
             padding: 0;
             background: linear-gradient(to bottom right, #121212, #380343);
@@ -46,7 +47,7 @@
             color: #ffffff;
             padding: 20px;
             text-align: center;
-            border-radius: 8px 8px 0 0;
+            border-radius: 8px 8px;
         }
 
         h1 {
@@ -104,7 +105,7 @@
             background: linear-gradient(to bottom right, #f1abc0, #d72733, #380343);
             color: #fff;
             margin-top: 20px;
-            border-radius: 0 0 8px 8px;
+            border-radius: 8px 8px;
         }
 
         button {
@@ -115,10 +116,10 @@
             border-radius: 4px;
             cursor: pointer;
             transition: background 0.3s, transform 0.3s;
+            margin-top: 14px;
         }
 
         button:hover {
-            background: linear-gradient(to bottom left, #d72733, #380343, #f1abc0);
             transform: scale(1.05);
         }
 
@@ -195,12 +196,12 @@
 <body class="parallax">
     <div class="container">
         <header>
-            <h1>How many times has customs been asked for?</h1>
+            <h1>How many times has customs been asked for in NickEh30's Chat?</h1>
             <button id="toggle-button">Show Daily Stats</button>
         </header>
         <main>
             <section id="stats" class="fade-in">
-                <h2>In Nick's chat, asking for customs is against the rules. However, many new viewers still do it, so I made a tracker for fun. :D</h2>
+                <h2>Requesting custom games is against Nick's chat rules. However, new viewers often ask, so I created a fun tracker. :D</h2>
                 <div id="total-mentions">
                     <h3>Total Mentions:</h3>
                     <p id="mentions-count"></p>
@@ -216,7 +217,7 @@
             </section>
         </main>
         <footer>
-            <p>-TheCoolDoggo :3</p>
+            <p>Made with love by TheCoolDoggo. Go out into the world and create something amazing 🤍</p>
         </footer>
     </div>
     <script>
