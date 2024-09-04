@@ -31,7 +31,6 @@
             min-height: 100vh;
             text-align: center;
         }
-
         .container {
             max-width: 800px;
             width: 100%;
@@ -219,6 +218,7 @@
         <footer>
             <img src="https://customtracker.tech/images/favicon.png" alt="Favicon" style="vertical-align: middle; margin-right: 1.5px; margin-bottom: 2px; width: 1em; height: 1em;">
             <p style="display: inline;">Made with love by TheCoolDoggo. Go out into the world and create something amazing 🤍</p>
+            <p>Counting since 8/22/24</p>
         </footer>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
@@ -292,6 +292,7 @@
 
     function countUp(element, start, end, duration) {
         let startTime = null;
+        let lastConfettiTrigger = 0;
 
         function animate(currentTime) {
             if (startTime === null) startTime = currentTime;
@@ -300,9 +301,9 @@
             const current = Math.min(Math.floor(easing * (end - start) + start), end);
             element.textContent = formatNumber(current);
             
-            // Trigger confetti effect if current count is a multiple of 1000
-            if (current % 1000 === 0 && current !== 0) {
+            if (current >= lastConfettiTrigger + 1000 && current <= lastConfettiTrigger + 1100) {
                 triggerConfetti();
+                lastConfettiTrigger = current;
             }
 
             if (current < end) {
