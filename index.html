@@ -221,7 +221,8 @@
             <p style="display: inline;">Made with love by TheCoolDoggo. Go out into the world and create something amazing 🤍</p>
         </footer>
     </div>
-    <script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+<script>
     document.addEventListener('DOMContentLoaded', () => {
         const toggleButton = document.getElementById('toggle-button');
         const statsSection = document.getElementById('stats');
@@ -297,7 +298,13 @@
             const progress = currentTime - startTime;
             const easing = easeOutCubic(progress / duration);
             const current = Math.min(Math.floor(easing * (end - start) + start), end);
-            element.textContent = current;
+            element.textContent = formatNumber(current);
+            
+            // Trigger confetti effect if current count is a multiple of 1000
+            if (current % 1000 === 0 && current !== 0) {
+                triggerConfetti();
+            }
+
             if (current < end) {
                 requestAnimationFrame(animate);
             }
@@ -308,6 +315,18 @@
         }
 
         requestAnimationFrame(animate);
+    }
+
+    function triggerConfetti() {
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
+    }
+
+    function formatNumber(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 </script>
 </body>
