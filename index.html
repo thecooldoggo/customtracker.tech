@@ -292,7 +292,7 @@
 
     function countUp(element, start, end, duration) {
         let startTime = null;
-        let lastConfettiTrigger = 0;
+        let confettiActive = false;
 
         function animate(currentTime) {
             if (startTime === null) startTime = currentTime;
@@ -301,9 +301,12 @@
             const current = Math.min(Math.floor(easing * (end - start) + start), end);
             element.textContent = formatNumber(current);
             
-            if (current >= lastConfettiTrigger + 1000 && current <= lastConfettiTrigger + 1100) {
+            if (current % 1000 === 0 && current !== 0 && !confettiActive) {
                 triggerConfetti();
-                lastConfettiTrigger = current;
+                confettiActive = true;
+            } else if (current % 1000 === 100 && confettiActive) {
+                stopConfetti();
+                confettiActive = false;
             }
 
             if (current < end) {
@@ -324,6 +327,10 @@
             spread: 70,
             origin: { y: 0.6 }
         });
+    }
+
+    function stopConfetti() {
+        confetti.reset();
     }
 
     function formatNumber(num) {
