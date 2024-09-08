@@ -12,7 +12,8 @@
             overflow: hidden;
             height: 100%;
             width: 100%;
-            background: #000;
+            background: url('images/yipie.jpg') no-repeat center center fixed;
+            background-size: cover;
         }
         canvas {
             position: absolute;
@@ -32,18 +33,19 @@
             useWorker: true
         });
 
-        function explodeConfetti(particles) {
+        function explodeConfetti(particles, originX, originY) {
             confettiInstance({
                 particleCount: particles,
                 spread: 160,
                 startVelocity: 60,
                 origin: {
-                    x: 0.5,
-                    y: 1
+                    x: originX,
+                    y: originY
                 }
             });
         }
-        explodeConfetti(100000);
+        explodeConfetti(10000, 0.5, 1);
+        explodeConfetti(10000, 0.5, 0);
     </script>
 </body>
 </html>
