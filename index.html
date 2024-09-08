@@ -221,13 +221,13 @@
             <p>Counting since 8/22/24</p>
         </footer>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
-<script>
+<script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+<script defer>
     document.addEventListener('DOMContentLoaded', () => {
         const toggleButton = document.getElementById('toggle-button');
         const statsSection = document.getElementById('stats');
         let isShowingDaily = false;
-        let hasTriggeredConfetti = false; // Flag to track if confetti has been triggered
+        let hasTriggeredConfetti = false;
 
         function fetchData(url, initialLoad = false) {
             fetch(url)
@@ -238,19 +238,21 @@
                     const topUserInfo = document.getElementById('top-user-info');
                     userList.innerHTML = '';
                     const sortedUsers = Object.entries(data.users).sort((a, b) => b[1] - a[1]).slice(0, 10);
+                    const fragment = document.createDocumentFragment();
                     sortedUsers.forEach(([user, count], index) => {
                         const li = document.createElement('li');
                         li.textContent = `${user}: ${count}`;
                         li.style.animationDelay = `${index * 0.1}s`;
-                        userList.appendChild(li);
+                        fragment.appendChild(li);
                     });
+                    userList.appendChild(fragment);
                     countUp(mentionsCount, 0, data.total_mentions, 1000);
                     if (sortedUsers.length > 0) {
                         const [topUser, maxMessages] = sortedUsers[0];
                         topUserInfo.innerHTML = `<span class="top-user-name highlight">${topUser}</span> with <span class="top-user-count">${maxMessages}</span> mentions.`;
                     }
                     if (initialLoad && !hasTriggeredConfetti) {
-                        triggerConfetti();
+                        setTimeout(triggerConfetti, 1000);
                         hasTriggeredConfetti = true;
                     }
                 })
@@ -278,8 +280,6 @@
         }
 
         toggleButton.addEventListener('click', toggleStats);
-
-        // Fetch data on initial load and set initialLoad flag to true
         fetchData('https://thecooldoggo.hackclub.app/customs_count.json', true);
 
         const fadeInElements = document.querySelectorAll('.fade-in');
@@ -320,9 +320,9 @@
 
     function triggerConfetti() {
         confetti({
-            particleCount: 150,
-            spread: 70,
-            origin: { y: 0.6 }
+            particleCount: 270,
+            spread: 150,
+            origin: { y: 0.5 }
         });
     }
 
