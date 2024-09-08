@@ -227,8 +227,9 @@
         const toggleButton = document.getElementById('toggle-button');
         const statsSection = document.getElementById('stats');
         let isShowingDaily = false;
+        let hasTriggeredConfetti = false; // Flag to track if confetti has been triggered
 
-        function fetchData(url) {
+        function fetchData(url, initialLoad = false) {
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
@@ -243,7 +244,7 @@
                         li.style.animationDelay = `${index * 0.1}s`;
                         userList.appendChild(li);
                     });
-                    countUp(mentionsCount, 0, data.total_mentions, 1000);
+                    countUp(mentionsCount, 0, data.total_mentions, 1000, initialLoad);
                     if (sortedUsers.length > 0) {
                         const [topUser, maxMessages] = sortedUsers[0];
                         topUserInfo.innerHTML = `<span class="top-user-name highlight">${topUser}</span> with <span class="top-user-count">${maxMessages}</span> mentions.`;
@@ -274,7 +275,8 @@
 
         toggleButton.addEventListener('click', toggleStats);
 
-        fetchData('https://thecooldoggo.hackclub.app/customs_count.json');
+        // Fetch data on initial load and set initialLoad flag to true
+        fetchData('https://thecooldoggo.hackclub.app/customs_count.json', true);
 
         const fadeInElements = document.querySelectorAll('.fade-in');
         const observer = new IntersectionObserver(entries => {
@@ -290,9 +292,8 @@
         });
     });
 
-    function countUp(element, start, end, duration) {
+    function countUp(element, start, end, duration, initialLoad) {
         let startTime = null;
-        let hasTriggeredConfetti = false;
 
         function animate(currentTime) {
             if (startTime === null) startTime = currentTime;
@@ -303,7 +304,7 @@
 
             if (current < end) {
                 requestAnimationFrame(animate);
-            } else if (!hasTriggeredConfetti) {
+            } else if (initialLoad && !hasTriggeredConfetti) {
                 triggerConfetti();
                 hasTriggeredConfetti = true;
             }
