@@ -244,10 +244,14 @@
                         li.style.animationDelay = `${index * 0.1}s`;
                         userList.appendChild(li);
                     });
-                    countUp(mentionsCount, 0, data.total_mentions, 1000, initialLoad);
+                    countUp(mentionsCount, 0, data.total_mentions, 1000);
                     if (sortedUsers.length > 0) {
                         const [topUser, maxMessages] = sortedUsers[0];
                         topUserInfo.innerHTML = `<span class="top-user-name highlight">${topUser}</span> with <span class="top-user-count">${maxMessages}</span> mentions.`;
+                    }
+                    if (initialLoad && !hasTriggeredConfetti) {
+                        triggerConfetti();
+                        hasTriggeredConfetti = true;
                     }
                 })
                 .catch(error => {
@@ -292,7 +296,7 @@
         });
     });
 
-    function countUp(element, start, end, duration, initialLoad) {
+    function countUp(element, start, end, duration) {
         let startTime = null;
 
         function animate(currentTime) {
@@ -304,9 +308,6 @@
 
             if (current < end) {
                 requestAnimationFrame(animate);
-            } else if (initialLoad && !hasTriggeredConfetti) {
-                triggerConfetti();
-                hasTriggeredConfetti = true;
             }
         }
 
