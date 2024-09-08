@@ -292,6 +292,7 @@
 
     function countUp(element, start, end, duration) {
         let startTime = null;
+        let hasTriggeredConfetti = false;
 
         function animate(currentTime) {
             if (startTime === null) startTime = currentTime;
@@ -299,11 +300,12 @@
             const easing = easeOutCubic(progress / duration);
             const current = Math.min(Math.floor(easing * (end - start) + start), end);
             element.textContent = formatNumber(current);
-            
-            triggerConfetti();
 
             if (current < end) {
                 requestAnimationFrame(animate);
+            } else if (!hasTriggeredConfetti) {
+                triggerConfetti();
+                hasTriggeredConfetti = true;
             }
         }
 
