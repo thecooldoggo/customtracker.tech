@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confetti Explosion</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            background: #000;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="confetti-canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('confetti-canvas');
+        const confetti = confetti.create(canvas, {
+            resize: true,
+            useWorker: true
+        });
+
+        function explodeConfetti(particles) {
+            confetti({
+                particleCount: particles,
+                spread: 160,
+                startVelocity: 60,
+                origin: {
+                    x: Math.random(),
+                    y: Math.random() - 0.2
+                }
+            });
+        }
+        for (let i = 0; i < 2000; i++) {
+            setTimeout(() => explodeConfetti(1000), i * 50);
+        }
+    </script>
+</body>
+</html>
