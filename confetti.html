@@ -36,16 +36,17 @@
         function explodeConfetti(particles, originX, originY) {
             confettiInstance({
                 particleCount: particles,
-                spread: 160,
-                startVelocity: 60,
+                spread: 180,
+                startVelocity: 300,
                 origin: {
                     x: originX,
                     y: originY
                 }
             });
         }
-        explodeConfetti(100000, 0.5, 1);
-        explodeConfetti(100000, 0.5, 0);
+        setInterval(() => {
+            explodeConfetti(1000000, Math.random(), Math.random());
+        }, 66.67);
     </script>
 </body>
 </html>
